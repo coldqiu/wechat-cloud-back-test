@@ -1,0 +1,40 @@
+<!--index.wxml-->
+<view class="container">
+
+<button open-type="getPhoneNumber" bindgetphonenumber="getPhoneNumber">微信获取手机号</button>
+<button open-type="getUserInfo" bindgetuserinfo="bindgetuserinfo">获取用户信息</button>
+<view bindtap="checkAuth">申请蓝牙权限</view>
+<view bindtap="checkAuth2">申请麦克风权限</view>
+
+  <view class="title">快速了解云开发</view>
+
+  <view class="top_tip">免鉴权接口调用 免部署后台 高并发</view>
+
+  <view class="power" wx:key="title" wx:for="{{powerList}}" wx:for-item="power">
+    <view class="power_info" data-index="{{index}}" bindtap="onClickPowerInfo">
+      <view class="power_info_text">
+        <view class="power_info_text_title">{{power.title}}</view>
+        <view class="power_info_text_tip">{{power.tip}}</view>
+      </view>
+      <image wx:if="{{!power.showItem}}" class="power_info_more" src="../../images/arrow.svg"></image>
+      <image wx:if="{{power.showItem}}" class="power_info_less" src="../../images/arrow.svg"></image>
+    </view>
+    <view wx:if="{{power.showItem}}">
+      <view wx:key="title" wx:for="{{power.item}}">
+        <view class="line"></view>
+        <view class="power_item" bindtap="jumpPage" data-page="{{item.page}}">
+          <view class="power_item_title">{{item.title}}</view>
+          <image class="power_item_icon" src="../../images/arrow.svg"></image>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <view class="environment" bindtap="onChangeShowEnvChoose">当前环境 {{ selectedEnv.alias }}</view>
+
+  <cloud-tip-modal showUploadTipProps="{{showUploadTip}}"></cloud-tip-modal>
+
+  <!-- 记录当前用户openId -->
+
+  <view bindtap="addCurentUserOpenId">记录当前用户openId</view>
+</view>
